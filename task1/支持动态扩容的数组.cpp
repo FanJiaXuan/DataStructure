@@ -97,9 +97,27 @@ int FindElementNo(SqList L, ElemType e){
     return 0;
 }
 
+//两个有序数组合并成一个有序数组
+int* ArrayMerge(int *a, int *b, int m, int n){
+    int *c = new int[m + n];
+    int p = 0, q = 0, i = 0;
+    while(p < m && q < n){
+        if(a[p] >= b[q])
+            c[i++] = b[q++];
+        else
+            c[i++] = a[p++];
+    }
+
+    while(p != m)
+        c[i++] = a[p++];
+    while(q != n)
+        c[i++] = b[q++];
+    return c;
+}
+
 int main(){
 
-    //TEST
+    //TEST DYNAMIC VACTOR
 
     SqList l;
     cout << ListInit(l) << endl;
@@ -124,7 +142,14 @@ int main(){
     //(11)输出顺序表L:a b f d e
     ListOutput(l);
     releaseList(l);
+    cout<<"---------------------------"<<endl;
+    //TEST ARRAY MERGE
 
+    int a[] = {1, 3, 5};
+    int b[] = {2, 4, 6};
+    int *c = ArrayMerge(a, b, 3, 3);
+    for(int i = 0; i < 6; i++)
+        cout << c[i] << " ";
     return 0;
 }
 
